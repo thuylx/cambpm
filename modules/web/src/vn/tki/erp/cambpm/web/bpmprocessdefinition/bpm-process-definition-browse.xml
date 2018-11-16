@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd" caption="msg://browseCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessdefinition.BpmProcessDefinitionBrowse" icon="ARROW_CIRCLE_RIGHT"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessdefinition">
+    <dsContext>
+        <groupDatasource id="bpmProcessDefinitionsDs" class="vn.tki.erp.cambpm.entity.BpmProcessDefinition"
+                         view="bpmProcessDefinition-view">
+            <query><![CDATA[select e from cambpm$BpmProcessDefinition e]]></query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600" width="800"/>
+    <layout expand="bpmProcessDefinitionsTable" spacing="true">
+        <filter id="filter" applyTo="bpmProcessDefinitionsTable" datasource="bpmProcessDefinitionsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="bpmProcessDefinitionsTable" height="100px" width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit" openType="THIS_TAB"/>
+                <action id="start" invoke="onStart" trackSelection="true"/>
+                <action id="deploy" invoke="onDeploy"/>
+                <action id="sync" invoke="onSync"/>
+            </actions>
+            <columns>
+                <group>
+                    <column id="bpmProcessDefinitionGroup" caption=" " width="1"/>
+                </group>
+                <column id="name"/>
+                <column id="description" maxTextLength="100"/>
+                <column id="key"/>
+                <column id="deployed"/>
+                <column id="active" editable="true"/>
+            </columns>
+            <rows datasource="bpmProcessDefinitionsDs"/>
+            <buttonsPanel id="buttonsPanel">
+                <button id="createBtn" action="bpmProcessDefinitionsTable.create"/>
+                <button id="editBtn" action="bpmProcessDefinitionsTable.edit"/>
+                <button id="startBtn" action="bpmProcessDefinitionsTable.start" caption="msg://startCaption"/>
+                <button id="deployBtn" action="bpmProcessDefinitionsTable.deploy" caption="msg://deployCaption"
+                        icon="font-icon:UPLOAD"/>
+                <button id="syncBtn" action="bpmProcessDefinitionsTable.sync" caption="msg://syncCaption"
+                        icon="font-icon:REFRESH"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

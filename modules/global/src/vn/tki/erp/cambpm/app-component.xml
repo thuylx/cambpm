@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="de.balvi.cuba.declarativecontrollers, com.haulmont.addon.globalevents, com.haulmont.cuba, com.company.editablebrowser">
+    <module blocks="*"
+            name="global">
+        <artifact appJar="true"
+                  name="bpm-global"/>
+        <property name="cuba.persistenceConfig"
+                  value="+vn/tki/erp/cambpm/persistence.xml"/>
+        <property name="cuba.metadataConfig"
+                  value="+vn/tki/erp/cambpm/metadata.xml"/>
+        <property name="cuba.viewsConfig"
+                  value="+vn/tki/erp/cambpm/views.xml"/>
+    </module>
+    <module blocks="core"
+            dependsOn="global"
+            name="core">
+        <artifact appJar="true"
+                  name="bpm-core"/>
+        <artifact classifier="db"
+                  configuration="dbscripts"
+                  ext="zip"
+                  name="bpm-core"/>
+        <property name="cuba.springContextConfig"
+                  value="+vn/tki/erp/cambpm/spring.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+vn.tki.erp.cambpm.core"/>
+    </module>
+    <module blocks="web"
+            dependsOn="global"
+            name="web">
+        <artifact appJar="true"
+                  name="bpm-web"/>
+        <artifact classifier="web"
+                  configuration="webcontent"
+                  ext="zip"
+                  name="bpm-web"/>
+        <property name="cuba.springContextConfig"
+                  value="+vn/tki/erp/cambpm/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig"
+                  value="+vn/tki/erp/cambpm/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig"
+                  value="+vn/tki/erp/cambpm/web-screens.xml"/>
+        <property name="cuba.menuConfig"
+                  value="+vn/tki/erp/cambpm/web-menu.xml"/>
+        <property name="cuba.permissionConfig"
+                  value="+vn/tki/erp/cambpm/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+vn.tki.erp.cambpm.web"/>
+    </module>
+</app-component>

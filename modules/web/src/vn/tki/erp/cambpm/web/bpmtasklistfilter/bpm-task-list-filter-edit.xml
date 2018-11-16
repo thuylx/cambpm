@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="vn.tki.erp.cambpm.web.bpmtasklistfilter.BpmTaskListFilterEdit"
+        datasource="bpmTaskListFilterDs"
+        focusComponent="fieldGroup"
+        messagesPack="vn.tki.erp.cambpm.web.bpmtasklistfilter">
+    <dsContext>
+        <datasource id="bpmTaskListFilterDs"
+                    class="vn.tki.erp.cambpm.entity.BpmTaskListFilter"
+                    view="_local"/>
+    </dsContext>
+    <dialogMode forceDialog="true"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="bpmTaskListFilterDs">
+            <column width="250px">
+                <field property="parameter"/>
+                <field contextHelpText="msg://taskListFilterValueContextHelp"
+                       property="value"/>
+                <field property="order"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

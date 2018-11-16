@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://detailCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessinstance.BpmProcessInstanceEdit"
+        datasource="bpmProcessInstanceDs"
+        focusComponent="fieldGroup"
+        icon="COG"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessinstance">
+    <dsContext>
+        <datasource id="bpmProcessInstanceDs"
+                    allowCommit="false"
+                    class="vn.tki.erp.cambpm.entity.BpmProcessInstance">
+            <collectionDatasource id="tasksDs"
+                                  property="tasks"/>
+            <collectionDatasource id="logEntriesDs"
+                                  property="logEntries"/>
+        </datasource>
+    </dsContext>
+    <actions>
+        <action id="openEntity"
+                invoke="onOpenEntity"/>
+        <action id="close"
+                invoke="onClose"/>
+    </actions>
+    <dialogMode height="500px"
+                resizable="true"
+                width="800px"/>
+    <layout expand="tabSheet"
+            margin="true,false,false,false"
+            spacing="true">
+        <tabSheet id="tabSheet">
+            <tab id="detailTab"
+                 caption="msg://detailCaption"
+                 expand="bpmTasksTable"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <fieldGroup id="fieldGroup"
+                            datasource="bpmProcessInstanceDs"
+                            editable="false">
+                    <column width="250px">
+                        <field property="bpmProcessDefinitionVersion"/>
+                        <field property="startedBy"/>
+                        <field property="state"/>
+                        <field generator="generateEntityField"
+                               property="entity"/>
+                    </column>
+                    <column>
+                        <field property="startTime"/>
+                        <field property="endTime"/>
+                        <field property="duration"/>
+                        <field cols="100"
+                               maxLength="100"
+                               property="businessKey"
+                               rows="2"/>
+                    </column>
+                </fieldGroup>
+                <table id="bpmTasksTable"
+                       width="100%">
+                    <columns>
+                        <column id="status"
+                                caption="  "
+                                generator="generateStatusCell"/>
+                        <column id="name"/>
+                        <column id="description"/>
+                        <column id="priority"/>
+                        <column id="startTime"/>
+                        <column id="endTime"/>
+                        <column id="duration"/>
+                        <column id="dueDate"/>
+                        <column id="followUpDate"/>
+                        <column id="candidateRoles"/>
+                        <column id="taskDefinitionKey"/>
+                    </columns>
+                    <rows datasource="tasksDs"/>
+                </table>
+            </tab>
+            <tab id="diagramTab"
+                 caption="msg://diagramCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <vbox id="diagramBox"
+                      enable="false"
+                      height="100%"
+                      spacing="true"/>
+            </tab>
+            <tab id="historyTab"
+                 caption="msg://historyTabCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <dataGrid id="historyGrid"
+                          datasource="logEntriesDs"
+                          height="100%"
+                          width="100%">
+                    <columns>
+                        <column property="operationType"/>
+                        <column property="time"/>
+                        <column property="changedProperty"/>
+                        <column property="oldPropertyValue"/>
+                        <column property="newPropertyValue"/>
+                        <column id="user"
+                                editable="false"/>
+                    </columns>
+                </dataGrid>
+            </tab>
+        </tabSheet>
+        <buttonsPanel>
+            <button id="openEntityBtn"
+                    action="openEntity"
+                    caption="msg://openEntityCaption"
+                    icon="PICKERFIELD_OPEN"/>
+            <button id="closeBtn"
+                    action="close"
+                    caption="msg://closeCaption"
+                    icon="CLOSE"/>
+        </buttonsPanel>
+    </layout>
+</window>

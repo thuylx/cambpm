@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://taskCompleteCaption"
+        class="vn.tki.erp.cambpm.web.bpmtask.BpmTaskComplete"
+        icon="CHECK_SQUARE"
+        messagesPack="vn.tki.erp.cambpm.web.bpmtask">
+    <dsContext>
+        <datasource id="bpmTaskDs"
+                    allowCommit="false"
+                    class="vn.tki.erp.cambpm.entity.BpmTask">
+            <collectionDatasource id="logEntriesDs"
+                                  property="logEntries"/>
+        </datasource>
+        <collectionDatasource id="usersDs"
+                              class="com.haulmont.cuba.security.entity.User"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from sec$User e
+join e.userRoles r
+where r.role.name in (:custom$roles)]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode closeable="true"
+                height="500"
+                resizable="true"
+                width="800"/>
+    <layout expand="mainTabSheet"
+            margin="true"
+            spacing="true">
+        <tabSheet id="mainTabSheet">
+            <tab id="taskFormTab"
+                 caption="msg://taskFormCaption"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <scrollBox id="scrollBox"
+                           height="100%">
+                    <label id="taskNameLbl"
+                           stylename="h1"/>
+                    <flowBox id="assigneeViewBox"
+                             spacing="true">
+                        <label id="assigneeLbl"
+                               stylename="light"/>
+                        <linkButton id="delegateBtn"
+                                    caption="msg://delegateCaption"
+                                    icon="HAND_O_DOWN"
+                                    invoke="onDelegateBtnClick"/>
+                    </flowBox>
+                    <flowBox id="assigneeEditBox"
+                             spacing="true"
+                             visible="false">
+                        <lookupField id="assigneeLookup"
+                                     caption="msg://delegatedCaption"
+                                     datasource="bpmTaskDs"
+                                     optionsDatasource="usersDs"
+                                     property="assignee"
+                                     width="200px"/>
+                        <linkButton id="confirmDelegateBtn"
+                                    caption="msg://confirmCaption"
+                                    icon="CHECK"
+                                    invoke="onConfirmDelegateBtnClick"/>
+                    </flowBox>
+                    <label id="descriptionLbl"
+                           datasource="bpmTaskDs"
+                           property="description"
+                           stylename="light"/>
+                    <button id="openEntityBtn"
+                            caption="msg://openEntityCaption"
+                            height="31px"
+                            icon="PICKERFIELD_OPEN"
+                            invoke="onOpenEntityBtnClick"
+                            stylename="borderless-colored"/>
+                    <vbox id="taskFormBox"
+                          margin="true,false,true,false"
+                          spacing="true"/>
+                </scrollBox>
+            </tab>
+            <tab id="diagramTab"
+                 caption="msg://diagramCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <vbox id="diagramBox"
+                      enable="false"
+                      height="100%"
+                      spacing="true"/>
+            </tab>
+            <tab id="historyTab"
+                 caption="msg://historyTabCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <dataGrid id="taskHistoryGrid"
+                          datasource="logEntriesDs"
+                          height="100%"
+                          width="100%">
+                    <columns>
+                        <column property="operationType"/>
+                        <column property="time"/>
+                        <column property="changedProperty"/>
+                        <column property="oldPropertyValue"/>
+                        <column property="newPropertyValue"/>
+                        <column editable="false"
+                                property="user"/>
+                    </columns>
+                </dataGrid>
+            </tab>
+            <tab id="taskDetailTab"
+                 caption="msg://taskInfoCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <scrollBox id="detailScrollBox"
+                           height="100%"
+                           spacing="true">
+                    <fieldGroup id="fieldGroup"
+                                datasource="bpmTaskDs"
+                                editable="false">
+                        <column width="300px">
+                            <field editable="false"
+                                   property="name"/>
+                            <field property="assignee"/>
+                            <field editable="false"
+                                   property="bpmProcessDefinitionVersion"/>
+                            <field editable="false"
+                                   property="description"/>
+                            <field editable="false"
+                                   property="dueDate"/>
+                            <field property="followUpDate"/>
+                            <field property="priority"/>
+                            <field editable="false"
+                                   property="startTime"/>
+                            <field editable="false"
+                                   property="owner"/>
+                            <field property="entity"/>
+                        </column>
+                    </fieldGroup>
+                </scrollBox>
+            </tab>
+        </tabSheet>
+        <buttonsPanel id="buttonsPanel">
+            <button id="completeBtn"
+                    caption="msg://completeCaption"
+                    icon="icons/ok.png"
+                    invoke="onCompleteBtnClick"/>
+            <button id="claimBtn"
+                    caption="msg://claimCaption"
+                    icon="font-icon:HAND_O_RIGHT"
+                    invoke="onClaimBtnClick"/>
+            <button id="unClaimBtn"
+                    caption="msg://unClaimCaption"
+                    icon="font-icon:HAND_STOP_O"
+                    invoke="onUnClaimBtnClick"/>
+            <button id="showProcessInstanceBtn"
+                    caption="msg://runningInstanceCaption"
+                    icon="font-icon:COG"
+                    invoke="onShowProcessInstanceBtnClick"/>
+            <button id="closeBtn"
+                    caption="msg://closeCaption"
+                    icon="CLOSE"
+                    invoke="onCloseBtnClick"/>
+        </buttonsPanel>
+    </layout>
+</window>

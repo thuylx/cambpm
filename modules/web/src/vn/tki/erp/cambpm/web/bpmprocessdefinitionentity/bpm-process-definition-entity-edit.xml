@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessdefinitionentity.BpmProcessDefinitionEntityEdit"
+        datasource="bpmProcessDefinitionEntityDs"
+        icon="FILE"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessdefinitionentity">
+    <dsContext>
+        <datasource id="bpmProcessDefinitionEntityDs"
+                    class="vn.tki.erp.cambpm.entity.BpmProcessDefinitionEntity"
+                    view="_local"/>
+    </dsContext>
+    <dialogMode forceDialog="true"
+                height="AUTO"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <flowBox spacing="true">
+            <label value="Entity name"/>
+            <lookupField id="entityLookupField"
+                         datasource="bpmProcessDefinitionEntityDs"
+                         property="entityName"
+                         width="250px"/>
+        </flowBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

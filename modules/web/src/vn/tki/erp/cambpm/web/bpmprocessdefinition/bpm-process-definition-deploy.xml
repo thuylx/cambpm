@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://deployScreenCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessdefinition.BpmProcessDefinitionDeploy"
+        icon="UPLOAD"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessdefinition">
+    <dsContext>
+        <collectionDatasource id="bpmProcessDefinitionGroupsDs"
+                              allowCommit="false"
+                              class="vn.tki.erp.cambpm.entity.BpmProcessDefinitionGroup"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from cambpm$BpmProcessDefinitionGroup e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="400"
+                width="600"/>
+    <layout expand="dropZone"
+            spacing="true"
+            width="100%">
+        <hbox spacing="true">
+            <label id="groupLbl"
+                   value="msg://deploymentNameCaption"/>
+            <lookupPickerField id="groupPicker"
+                               optionsDatasource="bpmProcessDefinitionGroupsDs"
+                               required="true"
+                               width="250px"/>
+        </hbox>
+        <hbox spacing="true">
+            <multiUpload id="resourceFiles"
+                         caption="msg://uploadFilesCaption"
+                         dropZone="dropZone"
+                         pasteZone="dropZone"
+                         permittedExtensions=".bpmn,.bpmn20"/>
+            <button id="clearBtn"
+                    caption="msg://clearCaption"
+                    invoke="onClearBtnClick"/>
+        </hbox>
+        <vbox id="dropZone"
+              spacing="true"
+              stylename="dropzone-container">
+            <label id="selectedFiles"/>
+            <label align="MIDDLE_CENTER"
+                   stylename="dropzone-description"
+                   value="Drop or paste file here"/>
+        </vbox>
+        <hbox spacing="true">
+            <button id="deployBtn"
+                    caption="mainMsg://actions.Deploy"
+                    invoke="onDeployBtnClick"/>
+            <button id="cancelBtn"
+                    caption="msg://cancelCaption"
+                    invoke="onCancelBtnClick"/>
+        </hbox>
+    </layout>
+</window>

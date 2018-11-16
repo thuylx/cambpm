@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessinstance.BpmProcessInstanceBrowse"
+        focusComponent="bpmProcessInstancesTable"
+        icon="COGS"
+        lookupComponent="bpmProcessInstancesTable"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessinstance">
+    <dsContext>
+        <groupDatasource id="bpmProcessInstancesDs"
+                         allowCommit="false"
+                         class="vn.tki.erp.cambpm.entity.BpmProcessInstance"
+                         datasourceClass="vn.tki.erp.cambpm.web.bpmprocessinstance.BpmProcessInstanceDatasource">
+            <query>
+                <![CDATA[select e from cambpm$BpmProcessInstance e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="300px"
+                resizable="true"/>
+    <layout spacing="true">
+        <table id="bpmProcessInstancesTable"
+               height="100%"
+               width="100%">
+            <actions>
+                <action id="edit"
+                        openType="THIS_TAB"/>
+            </actions>
+            <columns>
+                <column id="isCompleted"
+                        caption=" "
+                        generator="generateIsCompletedCell"/>
+                <column id="bpmProcessDefinitionVersion"/>
+                <column id="entity"/>
+                <column id="startedBy"/>
+                <column id="startTime"/>
+                <column id="businessKey"
+                        collapsed="true"/>
+                <column id="endTime"/>
+                <column id="duration"/>
+                <column id="state"/>
+            </columns>
+            <rows datasource="bpmProcessInstancesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="editBtn"
+                        action="bpmProcessInstancesTable.edit"
+                        caption="msg://detailCaption"
+                        icon="LIST_ALT"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

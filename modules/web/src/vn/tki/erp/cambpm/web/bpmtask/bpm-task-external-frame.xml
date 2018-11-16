@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="vn.tki.erp.cambpm.web.bpmtask.BpmTaskExternalFrame"
+        messagesPack="vn.tki.erp.cambpm.web.bpmtask">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <vbox id="externalTaskBox"
+              align="MIDDLE_CENTER"
+              margin="true"
+              spacing="true">
+            <linkButton id="externalFormBtn"
+                        align="MIDDLE_LEFT"
+                        caption="msg://openExternalFormCaption"
+                        invoke="onExternalFormBtnClick"
+                        stylename="primary"/>
+        </vbox>
+    </layout>
+</window>

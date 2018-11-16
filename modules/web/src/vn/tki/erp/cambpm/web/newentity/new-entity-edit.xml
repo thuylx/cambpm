@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="vn.tki.erp.cambpm.web.newentity.NewEntityEdit"
+        datasource="newEntityDs"
+        focusComponent="fieldGroup"
+        messagesPack="vn.tki.erp.cambpm.web.newentity">
+    <dsContext>
+        <datasource id="newEntityDs"
+                    class="vn.tki.erp.cambpm.entity.NewEntity"
+                    view="_local"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="bpmPanel"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="newEntityDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="reason"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="extendedEditWindowActions"/>
+        <buttonsPanel id="bpmPanel"/>
+    </layout>
+</window>

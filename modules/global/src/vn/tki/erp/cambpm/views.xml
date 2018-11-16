@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="vn.tki.erp.cambpm.entity.BpmProcessDefinition"
+          extends="_local"
+          name="bpmProcessDefinition-view">
+        <property name="entities"
+                  view="_minimal">
+        </property>
+        <property name="bpmProcessDefinitionGroup"
+                  view="_minimal"/>
+    </view>
+    <view class="vn.tki.erp.cambpm.entity.BpmTaskList"
+          extends="_local"
+          name="bpmTaskList-view">
+        <property name="parameters"
+                  view="_local">
+        </property>
+    </view>
+    <view class="vn.tki.erp.cambpm.entity.BpmProcessDefinition"
+          extends="_local"
+          name="bpmProcessDefinition-edit">
+        <property name="entities"
+                  view="_minimal"/>
+        <property name="bpmProcessDefinitionGroup"
+                  view="_minimal"/>
+    </view>
+</views>

@@ -1,0 +1,9 @@
+.highlight .djs-outline {
+   stroke-width: 2px !important;
+   stroke: #08c !important;
+   fill: #bce2f5 !important;
+   opacity:0.1;
+}
+.highlight .djs-visual>:nth-child(1) {
+   fill: #bce2f5 !important;
+}

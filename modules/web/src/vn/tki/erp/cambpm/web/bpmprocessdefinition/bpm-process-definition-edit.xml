@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessdefinition.BpmProcessDefinitionEdit"
+        datasource="bpmProcessDefinitionDs"
+        focusComponent="fieldGroup"
+        icon="EDIT"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessdefinition">
+    <dsContext>
+        <datasource id="bpmProcessDefinitionDs"
+                    class="vn.tki.erp.cambpm.entity.BpmProcessDefinition"
+                    view="bpmProcessDefinition-edit">
+            <collectionDatasource id="entitiesDs"
+                                  property="entities"/>
+            <collectionDatasource id="versionsDs"
+                                  property="versions"/>
+        </datasource>
+        <collectionDatasource id="bpmProcessDefinitionGroupsDs"
+                              class="vn.tki.erp.cambpm.entity.BpmProcessDefinitionGroup"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from cambpm$BpmProcessDefinitionGroup e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode closeable="true"
+                maximized="true"
+                resizable="true"/>
+    <layout expand="mainTabSheet"
+            spacing="true">
+        <tabSheet id="mainTabSheet">
+            <tab id="procDefDetail"
+                 caption="msg://procDefDetailTabCaption"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <scrollBox id="scrollBox"
+                           height="100%"
+                           spacing="true">
+                    <fieldGroup id="fieldGroup"
+                                datasource="bpmProcessDefinitionDs"
+                                width="100%">
+                        <column>
+                            <field property="key"/>
+                            <field property="name"
+                                   width="300px"/>
+                            <field cols="2"
+                                   property="description"
+                                   rows="3"
+                                   width="400px"/>
+                            <field optionsDatasource="bpmProcessDefinitionGroupsDs"
+                                   property="bpmProcessDefinitionGroup"
+                                   width="300px"/>
+                            <field property="active"/>
+                        </column>
+                    </fieldGroup>
+                    <groupBox id="entitiesBox"
+                              caption="msg://vn.tki.erp.cambpm.entity/BpmProcessDefinition.entities"
+                              height="100%">
+                        <table id="entitiesTable"
+                               height="150px"
+                               width="100%">
+                            <actions>
+                                <action id="create"/>
+                                <action id="edit"/>
+                                <action id="remove"/>
+                            </actions>
+                            <columns>
+                                <column id="entityName"/>
+                            </columns>
+                            <rows datasource="entitiesDs"/>
+                            <buttonsPanel>
+                                <button action="entitiesTable.create"/>
+                                <button action="entitiesTable.edit"/>
+                                <button action="entitiesTable.remove"/>
+                            </buttonsPanel>
+                        </table>
+                    </groupBox>
+                </scrollBox>
+            </tab>
+            <tab id="diagramTab"
+                 caption="msg://diagramTabCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <vbox id="diagramBox"
+                      enable="false"
+                      height="100%"
+                      spacing="true"/>
+            </tab>
+            <tab id="versionTab"
+                 caption="msg://versionTabCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <table id="versionsTable"
+                       height="100%"
+                       width="100%">
+                    <columns>
+                        <column id="version"/>
+                        <column id="versionTag"/>
+                        <column id="name"/>
+                        <column id="description"/>
+                        <column id="processDefinitionKey"/>
+                    </columns>
+                    <rows datasource="versionsDs"/>
+                </table>
+            </tab>
+        </tabSheet>
+        <frame id="windowActions"
+               screen="editWindowActions"
+               width="AUTO"/>
+    </layout>
+</window>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="vn.tki.erp.cambpm.web.bpmtasklist.BpmTaskListEdit"
+        datasource="bpmTaskListDs"
+        focusComponent="fieldGroup"
+        messagesPack="vn.tki.erp.cambpm.web.bpmtasklist">
+    <dsContext>
+        <datasource id="bpmTaskListDs"
+                    class="vn.tki.erp.cambpm.entity.BpmTaskList"
+                    view="bpmTaskList-view">
+            <collectionDatasource id="parametersDs"
+                                  property="parameters"/>
+        </datasource>
+    </dsContext>
+    <dialogMode forceDialog="true"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="bpmTaskListDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="desctiption"/>
+                <field property="order"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="parametersBox"
+                  caption="msg://vn.tki.erp.cambpm.entity/BpmTaskList.parameters">
+            <table id="parametersTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="parameter"/>
+                    <column id="value"/>
+                    <column id="order"/>
+                </columns>
+                <rows datasource="parametersDs"/>
+                <buttonsPanel>
+                    <button action="parametersTable.create"/>
+                    <button action="parametersTable.edit"/>
+                    <button action="parametersTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

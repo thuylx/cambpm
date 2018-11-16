@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="vn.tki.erp.cambpm.web.bpmtask.BpmTaskBrowse"
+        focusComponent="taskListsTable"
+        icon="ANGLE_DOUBLE_RIGHT"
+        lookupComponent="bpmTasksTable"
+        messagesPack="vn.tki.erp.cambpm.web.bpmtask">
+    <dsContext>
+        <groupDatasource id="bpmTasksDs"
+                         allowCommit="false"
+                         class="vn.tki.erp.cambpm.entity.BpmTask"
+                         datasourceClass="vn.tki.erp.cambpm.web.bpmtask.BpmTaskDatasource"/>
+        <collectionDatasource id="bpmTaskListsDs"
+                              allowCommit="false"
+                              class="vn.tki.erp.cambpm.entity.BpmTaskList"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from cambpm$BpmTaskList e
+order by e.order]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode closeOnClickOutside="true"
+                closeable="true"
+                height="600"
+                resizable="true"
+                width="800"/>
+    <layout spacing="true">
+        <split height="100%"
+               orientation="horizontal"
+               pos="15"
+               width="100%">
+            <vbox id="taskListBox"
+                  expand="taskListsTable"
+                  height="100%"
+                  spacing="true">
+                <table id="taskListsTable"
+                       columnControlVisible="false"
+                       columnHeaderVisible="false"
+                       settingsEnabled="false"
+                       stylename="borderless no-vertical-lines no-horizontal-lines no-header"
+                       width="100%">
+                    <actions>
+                        <action id="manage"
+                                invoke="onManage"
+                                openType="DIALOG"/>
+                        <action id="edit"
+                                openType="DIALOG"
+                                trackSelection="true"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="bpmTaskListsDs"/>
+                </table>
+                <buttonsPanel id="taskListManageBtnPanel">
+                    <linkButton id="manageBtn"
+                                action="taskListsTable.manage"
+                                caption="msg://manageCaption"
+                                icon="CREATE_ACTION"/>
+                    <linkButton id="editBtn"
+                                action="taskListsTable.edit"
+                                caption="msg://editCaption"
+                                icon="EDIT_ACTION"/>
+                </buttonsPanel>
+            </vbox>
+            <vbox id="taskBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <table id="bpmTasksTable"
+                       height="100%"
+                       textSelectionEnabled="true"
+                       width="100%">
+                    <actions>
+                        <action id="refresh"/>
+                        <action id="showDetail"
+                                caption="msg://openCaption"
+                                invoke="onShowDetail"
+                                openType="DIALOG"/>
+                        <action id="openTaskForm"
+                                invoke="onOpenTaskForm"
+                                trackSelection="true"/>
+                        <action id="exclude"/>
+                        <action id="claim"
+                                invoke="onClaim"
+                                trackSelection="true"/>
+                        <action id="openProcessInstance"
+                                invoke="onOpenProcessInstance"
+                                trackSelection="true"/>
+                    </actions>
+                    <columns>
+                        <column id="isClaimable"
+                                caption=" "
+                                generator="generateIsClaimableCell"
+                                sortable="false"/>
+                        <column id="name"/>
+                        <column id="bpmProcessDefinitionVersion"/>
+                        <column id="entity"/>
+                        <column id="assignee"/>
+                        <column id="startTime"/>
+                        <column id="description"
+                                collapsed="true"/>
+                        <column id="dueDate"/>
+                        <column id="followUpDate"
+                                collapsed="true"/>
+                        <column id="priority"
+                                collapsed="true"/>
+                        <column id="owner"
+                                collapsed="true"/>
+                        <column id="formKey"
+                                collapsed="true"/>
+                    </columns>
+                    <rows datasource="bpmTasksDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="refreshBtn"
+                                action="bpmTasksTable.refresh"/>
+                        <button id="openTaskFormBtn"
+                                action="bpmTasksTable.openTaskForm"
+                                caption="msg://openCaption"
+                                icon="icons/run.png"/>
+                        <button id="excludeBtn"
+                                action="bpmTasksTable.exclude"/>
+                        <button id="claimBtn"
+                                action="bpmTasksTable.claim"
+                                caption="msg://claimCaption"
+                                icon="font-icon:HAND_O_RIGHT"/>
+                        <button id="openProcessInstanceBtn"
+                                action="bpmTasksTable.openProcessInstance"
+                                caption="msg://openProcessInstanceCaption"
+                                icon="COG"/>
+                    </buttonsPanel>
+                </table>
+            </vbox>
+        </split>
+    </layout>
+</window>

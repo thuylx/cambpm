@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://startScreenCaption"
+        class="vn.tki.erp.cambpm.web.bpmprocessdefinition.BpmProcessDefinitionStart"
+        icon="COG"
+        messagesPack="vn.tki.erp.cambpm.web.bpmprocessdefinition">
+    <dsContext>
+        <datasource id="bpmProcessDefinitionDs"
+                    class="vn.tki.erp.cambpm.entity.BpmProcessDefinition"
+                    view="bpmProcessDefinition-view">
+            <collectionDatasource id="entitiesDs"
+                                  property="entities"/>
+        </datasource>
+    </dsContext>
+    <actions>
+        <action id="start"
+                invoke="onStart"/>
+        <action id="close"
+                invoke="onClose"/>
+    </actions>
+    <dialogMode height="500"
+                width="800"/>
+    <layout expand="tabSheet"
+            margin="true"
+            spacing="true">
+        <tabSheet id="tabSheet">
+            <tab id="startFormTab"
+                 caption="msg://startFormCaption"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <scrollBox id="scrollBox"
+                           height="100%">
+                    <label id="nameLbl"
+                           datasource="bpmProcessDefinitionDs"
+                           property="name"
+                           stylename="h1"/>
+                    <textArea id="descriptionLbl"
+                              datasource="bpmProcessDefinitionDs"
+                              editable="false"
+                              property="description"
+                              rows="2"
+                              stylename="borderless"
+                              visible="false"
+                              width="100%"/>
+                    <vbox id="fieldsBox"
+                          spacing="true"/>
+                </scrollBox>
+            </tab>
+            <tab id="diagramTab"
+                 caption="msg://diagramCaption"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <vbox id="diagramBox"
+                      enable="false"
+                      height="100%"
+                      spacing="true"/>
+            </tab>
+        </tabSheet>
+        <buttonsPanel id="buttonsPanel">
+            <button id="startBtn"
+                    action="start"
+                    caption="msg://startCaption"
+                    icon="ARROW_CIRCLE_O_RIGHT"/>
+            <button id="closeBtn"
+                    action="close"
+                    caption="msg://closeCaption"
+                    icon="CLOSE"/>
+        </buttonsPanel>
+    </layout>
+</window>

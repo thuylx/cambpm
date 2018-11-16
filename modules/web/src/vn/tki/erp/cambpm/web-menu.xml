@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-cambpm"
+          insertBefore="administration">
+        <item icon="ANGLE_DOUBLE_RIGHT"
+              screen="cambpm$BpmTask.browse"/>
+        <item icon="ARROW_CIRCLE_RIGHT"
+              screen="cambpm$BpmProcessDefinition.browse"/>
+        <item icon="COGS"
+              screen="cambpm$BpmProcessInstance.browse"/>
+        <item screen="cambpm$BpmProcessDefinitionGroup.browse"/>
+        <item screen="cambpm$BpmTaskList.browse"/>
+        <separator/>
+        <item screen="cambpm$NewEntity.browse"/>
+    </menu>
+</menu-config>
