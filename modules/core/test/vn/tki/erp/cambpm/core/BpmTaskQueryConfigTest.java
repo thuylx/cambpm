@@ -48,9 +48,7 @@ public class BpmTaskQueryConfigTest {
     public void list() {
         BpmTaskQuery taskQueryContext = new BpmTaskQuery();
 
-        BpmQueryExecutor query = AppBeans.get(BpmQueryExecutor.NAME);
-
-        List<BpmTask> bpmTasks = query.list(taskQueryContext
+        List<BpmTask> bpmTasks = taskQueryContext
                 .processInstanceBusinessKey("cambpm$NewEntity-eac7cd6c-498a-529a-2dd6-8e1b88d568d7")
 //                .processInstanceId("2de77122-e27a-11e8-8267-1c4d70ecce9e")
                 .or()
@@ -59,7 +57,8 @@ public class BpmTaskQueryConfigTest {
                 .includeAssignedTasks()
                 .endOr()
                 .orderByTaskCreateTime()
-                .asc());
+                .asc()
+                .list();
         assertEquals(2, bpmTasks.size());
     }
 }
