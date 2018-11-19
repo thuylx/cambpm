@@ -13,7 +13,7 @@ The annotation executor will add below component to the editor screen:
 3. Buttons to complete pending tasks related to the opening entity
 3. A button to reload task buttons
   
-Parameter: 
+Parameters: 
 
 * Set this parameter of "disableBpmFrame" to false to disable frame temporarily
 
@@ -52,6 +52,7 @@ To declare a frame field (component) should be stored in process variable when c
 
 #Generated usertask form
 Form field properties to auto generate user task form:
+
 * Key of form field property to specify if this field is stored (updated) to the entity (which map to process instance business key)
 
         Key: isEntityAttribute
