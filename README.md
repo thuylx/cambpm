@@ -5,7 +5,8 @@ This application component bootstrap Camunda process engine for BPM functions.
 It provides basic BUI for BPM as well.
 
 Cuba Platform version: 6.10.3
-#Enable bpm frame on entity editor
+
+# Enable bpm frame on entity editor
 Add annotation @EnableBpmFrame to the editor controller  
 The annotation executor will add below component to the editor screen:
 
@@ -36,12 +37,12 @@ Parameters:
 
         String taskRefreshActionContainerId() default "";
       
-#BPMN formkey config to work with Cuba Platform:
+# BPMN formkey config to work with Cuba Platform:
 Formkey pattern:  
 
        ^(frame|editor|browser|window|FRAME|EDITOR|BROWSER|WINDOW)(:([a-zA-Z0-9_\\-.]+\\$[a-zA-Z0-9_\\-.]+))?(:(EMBEDDED|embedded|DIALOG|dialog|NEW_WINDOW|new_window|NEW_TAB|new_tab|THIS_TAB|this_tab))?
 
-#Embedded form frame:
+# Embedded form frame:
 Frame to embedded in user task form have to extends BpmTaskAbstractFrame.  
 BpmTaskAbstractFrame provide below functions: 
  
@@ -51,7 +52,7 @@ To declare a frame field (component) should be stored in process variable when c
  (to be available in bpmn expression), annotation `@ProcessVariable` should be use.
 * `onCompleteTask()`: override this function to implement code which will be call right before completing the task
 
-#Generated usertask form
+# Generated usertask form
 Form field properties to auto generate user task form:
 
 * Key of form field property to specify if this field is stored (updated) to the entity (which map to process instance business key)
@@ -74,7 +75,7 @@ Form field properties to auto generate user task form:
         Key:line<br>
         Accepted value: any integer number. Default is 1
       
-#Beans to use in BPMN expression:
+# Beans to use in BPMN expression:
 1. ProcessApplication, bean name: app
 
         java.lang.String	getCurrentOrSubstitutedUserName() 
