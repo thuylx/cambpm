@@ -11,7 +11,7 @@ public interface CamPlatform {
     String NAME="cambpm_CamPlatform";
 
     //---------------------------------------------------------------------------------------------------
-    // ENTRY TO CAMUNDA ORIGIN SERVICES
+    // ENTRY TO CAMUNDA SERVICES
     //---------------------------------------------------------------------------------------------------
 
     /**
