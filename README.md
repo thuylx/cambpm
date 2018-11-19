@@ -5,7 +5,6 @@ This application component bootstrap Camunda process engine for BPM functions.
 It provides basic BUI for BPM as well.
 
 Cuba Platform version: 6.10.3
-
 #Enable bpm frame on entity editor
 Add annotation @EnableBpmFrame to the editor controller  
 The annotation executor will add below component to the editor screen:
