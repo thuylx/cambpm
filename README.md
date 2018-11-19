@@ -6,6 +6,7 @@ It provides basic BUI for BPM as well.
 
 #Enable bpm frame on entity editor
 Add annotation @EnableBpmFrame to the editor controller  
+
 The annotation executor will add below component to the editor screen:
 
 1. Set of relevant process definition starting buttons
