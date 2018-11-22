@@ -78,15 +78,17 @@ Form field properties to auto generate user task form:
 # Beans to use in BPMN expression:
 1. ProcessApplication, bean name: app
 
-        java.lang.String	getCurrentOrSubstitutedUserName() 
-        java.lang.String	getCurrentUserName() 
-        java.util.Collection<java.lang.String>	getCurrentUserRoles() 
-        com.haulmont.cuba.core.entity.Entity<?>	getEntity(org.camunda.bpm.engine.delegate.DelegateExecution execution) 
-        com.haulmont.cuba.core.entity.Entity<?>	getEntity(org.camunda.bpm.engine.delegate.DelegateExecution execution, java.lang.String viewName) 
-        java.lang.String	getSubstitutedUserName() 
-        com.haulmont.cuba.security.entity.User	getUser(java.lang.String loginName) 
-        com.haulmont.cuba.security.global.UserSession	getUserSession() 
-
+    |Function|Return type|Description|
+    |---|---|---|
+    |`getCurrentOrSubstitutedUserName()`|`String`|Login name of current or substituted (if available) user|
+    |`getCurrentUserName()`|`String`|Login name of current logged in user|
+    |`getSubstitutedUserName()`|`String`|Login name of substituted user. Null if not available|
+    |`getCurrentUserRoles()`|`Collection<String>`|Collection of roles current user has|
+    |`getEntity(DelegateExecution execution)`|`Entity`|Entity object which is processing by execution. Determine by business key of executing process instance. Entity loaded using _local view|
+    |`getEntity(DelegateExecution execution, String viewName)`|`Entity`|Entity object which is processing by execution. Determine by business key of executing process instance. Entity loaded using view with given view name|
+    |`getUser(String loginName)`|`User`|User object with given login name. From this, can get other user attributes|
+    |`getUserSession()`|`UserSession`|Current user session object|
+    
     Example: `${app.getCurrentUserName()}`
 
 2. All of other beans which implement `BpmExposedBean` interface
